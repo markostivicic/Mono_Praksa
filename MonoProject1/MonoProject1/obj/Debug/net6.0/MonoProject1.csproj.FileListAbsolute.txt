@@ -1,0 +1,15 @@
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\bin\Debug\net6.0\MonoProject1.exe
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\bin\Debug\net6.0\MonoProject1.deps.json
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\bin\Debug\net6.0\MonoProject1.runtimeconfig.json
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\bin\Debug\net6.0\MonoProject1.dll
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\bin\Debug\net6.0\MonoProject1.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\obj\Debug\net6.0\MonoProject1.csproj.AssemblyReference.cache
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\obj\Debug\net6.0\MonoProject1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\obj\Debug\net6.0\MonoProject1.AssemblyInfoInputs.cache
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\obj\Debug\net6.0\MonoProject1.AssemblyInfo.cs
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\obj\Debug\net6.0\MonoProject1.csproj.CoreCompileInputs.cache
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\obj\Debug\net6.0\MonoProject1.dll
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\obj\Debug\net6.0\refint\MonoProject1.dll
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\obj\Debug\net6.0\MonoProject1.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\obj\Debug\net6.0\MonoProject1.genruntimeconfig.cache
+C:\Users\Student\Desktop\NpgsqlRepo\MonoProject1\MonoProject1\obj\Debug\net6.0\ref\MonoProject1.dll
