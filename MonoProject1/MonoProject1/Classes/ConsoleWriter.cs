@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MonoProject1.Classes
 {
-    class ConsoleWriter : IConsoleWriter
+    public class ConsoleWriter : IConsoleWriter
     {
         public string Prefix { get; set; }
 

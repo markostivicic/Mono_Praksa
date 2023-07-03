@@ -15,9 +15,9 @@ namespace MonoProject1.Classes
             Console.WriteLine("The cat says: meow");
         }
 
-        public Cat()
+        public Cat(string name)
         {
-            consoleWriter.Prefix = "Cat";
+            this.Name = name;
         }
 
         private bool atHouse;

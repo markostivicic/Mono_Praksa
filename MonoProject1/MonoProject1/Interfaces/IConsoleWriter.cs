@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonoProject1.Interfaces
 {
-    interface IConsoleWriter
+    public interface IConsoleWriter
     {
         string Prefix { get; set; }
         void WriteLine(string line);

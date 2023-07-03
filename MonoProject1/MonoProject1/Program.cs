@@ -6,28 +6,34 @@ namespace MonoProject1
     class Program
     {
         static void Main(string[] args)
-        {
-            Cat Ferdo = new Cat();
-            Ferdo.AnimalSound();
-            Ferdo.Sleep();
-            Pet Cat = new Cat();
-            Cat.PetPet();
-            Cat.PetTrain();
-            Cat.Drill();
-            Ferdo.Drill();
-            Ferdo.Outside();
-            Ferdo.InHouse();
+        {   
+            string name = Console.ReadLine();
 
-            Pig Amte = new Pig();
-            Amte.Eat();
+            Cat ferdo = new Cat(name);
+            ferdo.AnimalSound();
+            ferdo.Sleep();
+            ferdo.InHouse();
+            name = Console.ReadLine();
+            Pet cat = new Cat(name);
+            cat.PetPet();
+            cat.PetTrain();
+            cat.Drill();
+            ferdo.Drill();
+            ferdo.Outside();
+            ferdo.InHouse();
 
-            Human<Dog> Marko = new Human<Dog>("Marko", "Štivičić");
-            Marko.BuyPet("Asi");
-            Marko.Pet.AnimalSound();
-            Marko.Pet.Drill();
-            Marko.Eat();
-            Marko.Pet.Run();
-            Marko.Say("Ang, buđenje!!");
+            Pig amte = new Pig();
+            amte.Eat();
+
+            Human<Dog> marko = new Human<Dog>("Marko", "Štivičić");
+            marko.PrintFullName();
+            marko.BuyPet("Asi");
+            marko.Pet.AnimalSound();
+            marko.Pet.Drill();
+            marko.Eat();
+            marko.Pet.Run();
+            marko.Say("Ang, buđenje!!");
+            
 
 
             
