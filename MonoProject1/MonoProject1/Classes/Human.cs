@@ -13,20 +13,20 @@ namespace MonoProject1.Classes
         {
             get
             {
-                return _firstName;
+                return firstName;
             }
             set
             {
-                _firstName = value;
-                _consoleWriter.Prefix = value;
+                firstName = value;
+                consoleWriter.Prefix = value;
             }
         }
         public string LastName { get; set; }
 
-        public PetT Pet { get { return _pet; } }
+        public PetT Pet { get { return pet; } }
 
-        private string _firstName;
-        private PetT _pet;
+        private string firstName;
+        private PetT pet;
 
         public Human() : base(new ConsoleWriter("John"))
         {
@@ -47,23 +47,23 @@ namespace MonoProject1.Classes
 
         public void PrintFullName()
         {
-            _consoleWriter.WriteLine(GetFullName());
+            consoleWriter.WriteLine(GetFullName());
         }
 
         public void BuyPet(string name)
         {
-            _pet = new PetT();
-            _pet.Name = name;
+            pet = new PetT();
+            pet.Name = name;
         }
 
         public void Say(string message)
         {
-            _consoleWriter.WriteLine(message);
+            consoleWriter.WriteLine(message);
         }
 
         public void Eat()
         {
-            _consoleWriter.WriteLine("Go to eat");
+            consoleWriter.WriteLine("Go to eat");
 
         }
 

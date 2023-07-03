@@ -19,15 +19,15 @@ namespace MonoProject1.Classes
 
         public string? Name
         {
-            get { return _name; }
+            get { return name; }
             set
             {
-                _name = value;
-                _consoleWriter.Prefix = value;
+                name = value;
+                consoleWriter.Prefix = value;
             }
         }
 
-        private string? _name;
+        private string? name;
 
         public Animal() : base(new ConsoleWriter("Unknown animal"))
         {

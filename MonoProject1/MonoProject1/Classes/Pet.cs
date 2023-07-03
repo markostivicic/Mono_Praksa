@@ -9,37 +9,37 @@ namespace MonoProject1.Classes
 {
     abstract class Pet : IPet
     {
-        private bool _pettrain = false;
-        protected IConsoleWriter _consoleWriter;
+        private bool pettrain = false;
+        protected IConsoleWriter consoleWriter;
 
         public Pet(IConsoleWriter consoleWriter)
         {
-            _consoleWriter = consoleWriter;
+            this.consoleWriter = consoleWriter;
         }
         public void PetTrain()
         {
-            if (_pettrain)
+            if (pettrain)
             {
-                _consoleWriter.WriteLine("Pet already train");
+                consoleWriter.WriteLine("Pet already train");
             }
             else
             {
-                _consoleWriter.WriteLine("Pet need to train");
-                _pettrain = true;
+                consoleWriter.WriteLine("Pet need to train");
+                pettrain = true;
             }
 
         }
 
         public void PetPet()
         {
-            if (_pettrain)
+            if (pettrain)
             {
-                _consoleWriter.WriteLine("Good boy");
-                _pettrain = false;
+                consoleWriter.WriteLine("Good boy");
+                pettrain = false;
             }
             else
             {
-                _consoleWriter.WriteLine("Pet need training");
+                consoleWriter.WriteLine("Pet need training");
 
             }
 

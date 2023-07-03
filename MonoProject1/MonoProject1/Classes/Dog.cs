@@ -13,24 +13,24 @@ namespace MonoProject1.Classes
             {
                 WaveTail();
                 AnimalSound();
-                _consoleWriter.WriteLine("Eating");
+                consoleWriter.WriteLine("Eating");
             }
 
             public void WaveTail()
             {
-                _consoleWriter.WriteLine("Wave tail");
+                consoleWriter.WriteLine("Wave tail");
             }
 
             public void Run()
             {
-                _consoleWriter.WriteLine("Runing around and geting tired");
+                consoleWriter.WriteLine("Runing around and geting tired");
                 Sleep();
             }
 
 
             public override void AnimalSound()
             {
-                _consoleWriter.WriteLine("Wuf, wuf");
+                consoleWriter.WriteLine("Wuf, wuf");
             }
         }
 }

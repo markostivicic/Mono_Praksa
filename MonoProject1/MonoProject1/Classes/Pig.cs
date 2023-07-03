@@ -18,12 +18,12 @@ namespace MonoProject1.Classes
         public void Eat()
         {
             WalkToFood();
-            _consoleWriter.WriteLine("Eating");
+            consoleWriter.WriteLine("Eating");
         }
 
         public void WalkToFood()
         {
-            _consoleWriter.WriteLine("Walking to food");
+            consoleWriter.WriteLine("Walking to food");
 
         }
     }

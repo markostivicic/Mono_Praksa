@@ -17,41 +17,41 @@ namespace MonoProject1.Classes
 
         public Cat()
         {
-            _consoleWriter.Prefix = "Cat";
+            consoleWriter.Prefix = "Cat";
         }
 
-        private bool _atHouse;
+        private bool atHouse;
 
         public void InHouse()
         {
-            if (_atHouse)
+            if (atHouse)
             {
-                _consoleWriter.WriteLine("Already in house");
+                consoleWriter.WriteLine("Already in house");
             }
             else
             {
-                _consoleWriter.WriteLine("Going in...");
-                _consoleWriter.WriteLine("House");
-                _atHouse = true;
+                consoleWriter.WriteLine("Going in...");
+                consoleWriter.WriteLine("House");
+                atHouse = true;
             }
         }
 
         public void Outside()
         {
-            if (_atHouse)
+            if (atHouse)
             {
-                _consoleWriter.WriteLine("Go outside");
-                _atHouse = false;
+                consoleWriter.WriteLine("Go outside");
+                atHouse = false;
             }
             else
             {
-                _consoleWriter.WriteLine("Already outside");
+                consoleWriter.WriteLine("Already outside");
             }
         }
 
         public override void Drill()
         {
-            if (_atHouse)
+            if (atHouse)
             {
                 GoInHouse();
             }
