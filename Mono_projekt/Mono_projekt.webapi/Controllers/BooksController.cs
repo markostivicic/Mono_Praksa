@@ -1,4 +1,5 @@
-﻿using Mono_projekt.webapi.Models;
+﻿using Mono_projekt.webapi.DataStorage;
+using Mono_projekt.webapi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Mono_projekt.webapi.Controllers
         [HttpPost]
         public HttpResponseMessage Create([FromBody] CreateBookRest createBookRest)
         {
-            Book book = Library.Create(createBookRest);
+            Book book = BooksStorage.Create(createBookRest);
             if (book != null)
             {
                 return Request.CreateResponse<Book>(HttpStatusCode.OK, book);
@@ -34,7 +35,7 @@ namespace Mono_projekt.webapi.Controllers
         [HttpGet]
         public HttpResponseMessage GetAll()
         {
-            List<GetBookRest> books = Library.MapBookToGetBookRest(Library.GetAllBooks());
+            List<GetBookRest> books = BooksStorage.MapBookToGetBookRest(BooksStorage.GetAllBooks());
             if (books.Count != 0)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, books);
@@ -47,9 +48,9 @@ namespace Mono_projekt.webapi.Controllers
         [HttpGet]
         public HttpResponseMessage GetById(Guid id)
         {
-            Book book = Library.GetById(id);
+            Book book = BooksStorage.GetById(id);
             List<Book> newlist = new List<Book> { book };
-            List<GetBookRest> books = Library.MapBookToGetBookRest(newlist);
+            List<GetBookRest> books = BooksStorage.MapBookToGetBookRest(newlist);
             if (book == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Book Not Found");
@@ -69,7 +70,7 @@ namespace Mono_projekt.webapi.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Body cannot be emty");
             }
-            Book book = Library.Update(id, updateBookRest);
+            Book book = BooksStorage.Update(id, updateBookRest);
             if (book == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Book Not Found");
@@ -86,75 +87,13 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                Library.Delete(id);
+                BooksStorage.Delete(id);
                 return Request.CreateResponse(HttpStatusCode.NoContent);
             }
             catch
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Book Not Found");
             }
-        }
-
-        
-
-    }
-
-    public class Library
-    {
-        private static ICollection<Book> _books = new List<Book>();
-        public static Book Create(CreateBookRest createBookRest)
-        {
-            Guid id = Guid.NewGuid();
-            Book book = new Book();
-            book.Id = id;
-            book.Title = createBookRest.Title;
-            book.AuthorName = createBookRest.AuthorName;
-            _books.Add(book);
-            return book;
-        }
-
-        public static List<Book> GetAllBooks()
-        {
-            return _books.ToList();
-        }
-
-        public static List<GetBookRest> MapBookToGetBookRest(List<Book> books)
-        {
-            List<GetBookRest> list = new List<GetBookRest>();
-            foreach (Book book in books)
-            {
-                GetBookRest newbook = new GetBookRest(book);
-                list.Add(newbook);
-            }
-            return list;
-        }
-
-        public static Book GetById(Guid id)
-        {
-            return _books.Where(a => a.Id == id).FirstOrDefault();
-        }
-
-        public static Book Update(Guid id, UpdateBookRest updateBookRest)
-        {
-            Book book = GetById(id);
-
-            if(updateBookRest.AuthorName != null)
-            {
-                book.AuthorName = updateBookRest.AuthorName;
-
-            }
-
-            if (updateBookRest.Title != null)
-            {
-                book.Title = updateBookRest.Title;
-            }
-
-            return book;
-        }
-
-        public static void Delete(Guid id)
-        {
-            _books.Remove(_books.Single(a => a.Id == id));
         }
     }
 
