@@ -15,6 +15,7 @@ using HttpPutAttribute = System.Web.Http.HttpPutAttribute;
 using HttpGetAttribute = System.Web.Http.HttpGetAttribute;
 using Mono_projekt.Models;
 using Mono_projekt.Service;
+using System.Threading.Tasks;
 
 namespace Mono_projekt.webapi.Controllers
 {
@@ -22,13 +23,13 @@ namespace Mono_projekt.webapi.Controllers
     {
         private EmployeeService service = new EmployeeService();
         [HttpPost]
-        public HttpResponseMessage InsertEmployee([FromBody] CreateEmployeeRest createEmployeeRest)
+        public async Task<HttpResponseMessage> InsertEmployeeAsync([FromBody] CreateEmployeeRest createEmployeeRest)
         {
             try
             {
                 Guid employeeId = Guid.NewGuid();
                 Employee newCusromer = new Employee(employeeId, createEmployeeRest.FirstName, createEmployeeRest.LastName);
-                Employee employee = service.Create(newCusromer);
+                Employee employee = await service.CreateAsync(newCusromer);
                 if (employee != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, employee);
@@ -45,11 +46,11 @@ namespace Mono_projekt.webapi.Controllers
 
         [HttpDelete]
         [Route("api/employee/{employeeId}")]
-        public HttpResponseMessage DeleteEmployee(Guid employeeId)
+        public async Task<HttpResponseMessage> DeleteEmployeeAsync(Guid employeeId)
         {
             try
             {
-                bool delete = service.Delete(employeeId);
+                bool delete = await service.DeleteAsync(employeeId);
                 if (delete)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, "Employee deleted");
@@ -64,12 +65,12 @@ namespace Mono_projekt.webapi.Controllers
 
         [HttpPut]
         [Route("api/employee/{id}")]
-        public HttpResponseMessage Update(Guid id, [FromBody] UpdateEmployeeRest updateEmployeeRest)
+        public async Task<HttpResponseMessage> UpdateAsync(Guid id, [FromBody] UpdateEmployeeRest updateEmployeeRest)
         {
             try
             {
                 Employee newEmployee = new Employee(id, updateEmployeeRest.FirstName, updateEmployeeRest.LastName);
-                Employee employee = service.Update(id, newEmployee);
+                Employee employee = await service.UpdateAsync(id, newEmployee);
                 if (employee != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, "Employee updated");
@@ -84,11 +85,11 @@ namespace Mono_projekt.webapi.Controllers
 
         [HttpGet]
         [Route("api/employee/{id}")]
-        public HttpResponseMessage GetEmployee(Guid id)
+        public async Task<HttpResponseMessage> GetEmployeeAsync(Guid id)
         {
             try
             {
-                Employee employee = service.GetById(id);
+                Employee employee = await service.GetByIdAsync(id);
                 if (employee != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, employee);
@@ -101,11 +102,11 @@ namespace Mono_projekt.webapi.Controllers
             }
         }
         [HttpGet]
-        public HttpResponseMessage GetAllEmployees()
+        public async Task<HttpResponseMessage> GetAllEmployees()
         {
             try
             {
-                List<Employee> employees = service.GetAll();
+                List<Employee> employees = await service.GetAllAsync();
                 return Request.CreateResponse(HttpStatusCode.OK, employees);
             }
             catch (Exception ex)

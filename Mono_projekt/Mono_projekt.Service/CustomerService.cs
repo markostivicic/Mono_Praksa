@@ -12,29 +12,29 @@ namespace Mono_projekt.Service
     {
         private CustomerRepository repository = new CustomerRepository();
 
-        public Customer Create(Customer customer)
+        public async Task<Customer> CreateAsync(Customer customer)
         {
-            return repository.Create(customer);
+            return await repository.CreateAsync(customer);
         }
 
-        public Customer Update(Guid id, Customer customer)
+        public async Task<Customer> UpdateAsync(Guid id, Customer customer)
         {
-            return repository.Update(id, customer);
+            return await repository.UpdateAsync(id, customer);
         }
 
-        public bool Delete(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            return repository.Delete(id);
+            return await repository.DeleteAsync(id);
         }
 
-        public Customer GetById(Guid id)
+        public async Task<Customer> GetByIdAsync(Guid id)
         {
-            return repository.GetById(id);
+            return await repository.GetByIdAsync(id);
         }
 
-        public List<Customer> GetAll()
+        public async Task<List<Customer>> GetAllAsync()
         {
-            return repository.GetAll();
+            return await repository.GetAllAsync();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Mono_projekt.Repository
             connectionString = "Server=localhost;Port=5432;Database=HairSalon;User Id=postgres;Password=postgres;";
         }
 
-        public Employee Create(Employee employee)
+        public async Task<Employee> CreateAsync(Employee employee)
         {
             var connection = new NpgsqlConnection(connectionString);
             var command = new NpgsqlCommand("INSERT INTO Employee (Id, FirstName, LastName) VALUES (@id, @firstName, @lastName)", connection);
@@ -30,7 +30,7 @@ namespace Mono_projekt.Repository
                 command.Parameters.AddWithValue("@id", employee.Id);
                 command.Parameters.AddWithValue("@firstName", employee.FirstName);
                 command.Parameters.AddWithValue("@lastName", employee.LastName);
-                int affectedRows = command.ExecuteNonQuery();
+                int affectedRows = await command.ExecuteNonQueryAsync();
                 if (affectedRows > 0)
                 {
                     return employee;
@@ -39,7 +39,7 @@ namespace Mono_projekt.Repository
             }
         }
 
-        public Employee Update(Guid id, Employee employee)
+        public async Task<Employee> UpdateAsync(Guid id, Employee employee)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
@@ -61,7 +61,7 @@ namespace Mono_projekt.Repository
                     updateCommand.Parameters.AddWithValue("id", id);
                     updateCommand.Parameters.AddWithValue("firstName", employee.FirstName);
                     updateCommand.Parameters.AddWithValue("lastName", employee.LastName);
-                    int rowsAffected = updateCommand.ExecuteNonQuery();
+                    int rowsAffected = await updateCommand.ExecuteNonQueryAsync();
 
                     if (rowsAffected > 0)
                     {
@@ -75,7 +75,7 @@ namespace Mono_projekt.Repository
             }
         }
 
-        public bool Delete(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
@@ -96,7 +96,7 @@ namespace Mono_projekt.Repository
                 {
                     deleteCommand.Parameters.AddWithValue("id", id);
                     deleteCommand.Connection = connection;
-                    int rowsAffected = deleteCommand.ExecuteNonQuery();
+                    int rowsAffected = await deleteCommand.ExecuteNonQueryAsync();
                     if (rowsAffected > 0)
                     {
                         return true;
@@ -109,7 +109,7 @@ namespace Mono_projekt.Repository
             }
         }
 
-        public Employee GetById(Guid Id)
+        public async Task<Employee> GetByIdAsync(Guid Id)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
@@ -120,7 +120,7 @@ namespace Mono_projekt.Repository
                 {
                     command.Parameters.AddWithValue("id", Id);
 
-                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
                     {
                         if (reader.Read())
                         {
@@ -137,7 +137,7 @@ namespace Mono_projekt.Repository
                 return null;
             }
         }
-        public List<Employee> GetAll()
+        public async Task<List<Employee>> GetAllAsync()
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
@@ -146,7 +146,7 @@ namespace Mono_projekt.Repository
                 using (NpgsqlCommand command = new NpgsqlCommand(selectSql, connection))
                 {
                     List<Employee> employees = new List<Employee>();
-                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
                     {
                         while (reader.Read())
                         {

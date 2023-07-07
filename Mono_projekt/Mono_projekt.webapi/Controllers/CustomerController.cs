@@ -16,6 +16,7 @@ using HttpPutAttribute = System.Web.Http.HttpPutAttribute;
 using HttpGetAttribute = System.Web.Http.HttpGetAttribute;
 using Mono_projekt.Service;
 using Mono_projekt.Models;
+using System.Threading.Tasks;
 
 namespace Mono_projekt.webapi.Controllers
 {
@@ -23,13 +24,13 @@ namespace Mono_projekt.webapi.Controllers
     {
         private CustomerService service = new CustomerService();  
         [HttpPost]
-        public HttpResponseMessage InsertCustomer([FromBody] CreateCustomerRest createCustomerRest)
+        public async Task<HttpResponseMessage> InsertCustomerAsync([FromBody] CreateCustomerRest createCustomerRest)
         {
             try
             {
                 Guid customerId = Guid.NewGuid();
                 Customer newCusromer = new Customer(customerId, createCustomerRest.FirstName, createCustomerRest.LastName);
-                Customer customer = service.Create(newCusromer);
+                Customer customer = await service.CreateAsync(newCusromer);
                 if (customer != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, customer);
@@ -46,11 +47,11 @@ namespace Mono_projekt.webapi.Controllers
 
         [HttpDelete]
         [Route("api/customer/{customerId}")]
-        public HttpResponseMessage DeleteCustomer(Guid customerId)
+        public async Task<HttpResponseMessage> DeleteCustomerAsync(Guid customerId)
         {
             try
             {
-                bool delete = service.Delete(customerId);
+                bool delete = await service.DeleteAsync(customerId);
                 if (delete)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, "Customer deleted");
@@ -65,12 +66,12 @@ namespace Mono_projekt.webapi.Controllers
 
         [HttpPut]
         [Route("api/customer/{id}")]
-        public HttpResponseMessage Update(Guid id, [FromBody] UpdateCustomerRest updateCustomerRest)
+        public async Task<HttpResponseMessage> UpdateAsync(Guid id, [FromBody] UpdateCustomerRest updateCustomerRest)
         {
             try
             {
                 Customer newCusromer = new Customer(id, updateCustomerRest.FirstName, updateCustomerRest.LastName);
-                Customer customer = service.Update(id,newCusromer);
+                Customer customer = await service.UpdateAsync(id,newCusromer);
                 if(customer != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, "Customer updated");
@@ -85,11 +86,11 @@ namespace Mono_projekt.webapi.Controllers
 
         [HttpGet]
         [Route("api/customer/{id}")]
-        public HttpResponseMessage GetCustomer(Guid id)
+        public async Task<HttpResponseMessage> GetCustomer(Guid id)
         {
             try
             {
-                Customer customer = service.GetById(id);
+                Customer customer = await service.GetByIdAsync(id);
                 if(customer != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, customer);
@@ -102,11 +103,11 @@ namespace Mono_projekt.webapi.Controllers
             }   
         }
         [HttpGet]
-        public HttpResponseMessage GetAllCustomers()
+        public async Task<HttpResponseMessage> GetAllCustomersAsync()
         {
             try
             {
-                List<Customer> customers = service.GetAll();
+                List<Customer> customers = await service.GetAllAsync();
                 return Request.CreateResponse(HttpStatusCode.OK, customers);
             }
             catch (Exception ex)

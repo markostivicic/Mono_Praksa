@@ -214,7 +214,6 @@
     <Compile Include="Models\CreateBookRest.cs" />
     <Compile Include="Models\CreateCustomerRest.cs" />
     <Compile Include="Models\CreateEmployeeRest.cs" />
-    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\GetBookRest.cs" />
     <Compile Include="Models\UpdateBookRest.cs" />
     <Compile Include="Models\UpdateCustomerRest.cs" />
