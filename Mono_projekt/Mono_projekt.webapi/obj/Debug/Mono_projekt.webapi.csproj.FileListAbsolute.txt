@@ -113,3 +113,16 @@ C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\System.
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\System.Threading.Channels.xml
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\System.Threading.Tasks.Extensions.xml
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\System.ValueTuple.xml
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Model.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Service.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Model.Common.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Service.Common.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Repository.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Repository.Common.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Model.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Service.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Model.Common.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Service.Common.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Repository.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Repository.dll.config
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Repository.Common.pdb

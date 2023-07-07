@@ -1,0 +1,11 @@
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\bin\Debug\Mono_projekt.Service.Common.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\bin\Debug\Mono_projekt.Service.Common.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\bin\Debug\Mono_projekt.Model.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\bin\Debug\Mono_projekt.Model.Common.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\bin\Debug\Mono_projekt.Model.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\bin\Debug\Mono_projekt.Model.Common.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\obj\Debug\Mono_projekt.Service.Common.csproj.AssemblyReference.cache
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\obj\Debug\Mono_projekt.Service.Common.csproj.CoreCompileInputs.cache
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\obj\Debug\Mono_projekt.Service.Common.csproj.CopyComplete
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\obj\Debug\Mono_projekt.Service.Common.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\obj\Debug\Mono_projekt.Service.Common.pdb

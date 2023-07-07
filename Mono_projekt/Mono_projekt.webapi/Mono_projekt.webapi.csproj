@@ -214,7 +214,6 @@
     <Compile Include="Models\CreateBookRest.cs" />
     <Compile Include="Models\CreateCustomerRest.cs" />
     <Compile Include="Models\CreateEmployeeRest.cs" />
-    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\GetBookRest.cs" />
     <Compile Include="Models\UpdateBookRest.cs" />
@@ -364,6 +363,16 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mono_projekt.Model\Mono_projekt.Model.csproj">
+      <Project>{5C3B6F03-F595-43BA-8B05-B5F280923BAF}</Project>
+      <Name>Mono_projekt.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono_projekt.Service\Mono_projekt.Service.csproj">
+      <Project>{D6647E81-4C97-44F2-B159-0BC67D38AD7C}</Project>
+      <Name>Mono_projekt.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
