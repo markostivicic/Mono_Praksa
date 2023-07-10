@@ -19,7 +19,14 @@ namespace Mono_projekt.Service
 
         public async Task<Customer> UpdateAsync(Guid id, Customer customer)
         {
-            return await repository.UpdateAsync(id, customer);
+            if (id != null && customer != null)
+            {
+                return await repository.UpdateAsync(id, customer);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public async Task<bool> DeleteAsync(Guid id)

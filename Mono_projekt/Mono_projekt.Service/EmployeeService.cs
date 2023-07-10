@@ -1,4 +1,5 @@
-﻿using Mono_projekt.Models;
+﻿using Mono_projekt.Model.Common;
+using Mono_projekt.Models;
 using Mono_projekt.Repository;
 using Mono_projekt.Repository.Common;
 using System;
@@ -20,7 +21,14 @@ namespace Mono_projekt.Service
 
         public async Task<Employee> UpdateAsync(Guid id, Employee employee)
         {
-            return await repository.UpdateAsync(id, employee);
+            if (id != null && employee != null)
+            {
+                return await repository.UpdateAsync(id, employee);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public async Task<bool> DeleteAsync(Guid id)

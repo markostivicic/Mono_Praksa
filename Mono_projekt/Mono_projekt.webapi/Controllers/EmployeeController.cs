@@ -50,8 +50,8 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                bool delete = await service.DeleteAsync(employeeId);
-                if (delete)
+                bool isDelete = await service.DeleteAsync(employeeId);
+                if (isDelete)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, "Employee deleted");
                 }
@@ -70,10 +70,10 @@ namespace Mono_projekt.webapi.Controllers
             try
             {
                 Employee newEmployee = new Employee(id, updateEmployeeRest.FirstName, updateEmployeeRest.LastName);
-                Employee employee = await service.UpdateAsync(id, newEmployee);
-                if (employee != null)
+                Employee updateEmployee = await service.UpdateAsync(id, newEmployee);
+                if (updateEmployee != null)
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, "Employee updated");
+                    return Request.CreateResponse(HttpStatusCode.OK, updateEmployee);
                 }
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, "Failed to update employee");
             }
@@ -89,10 +89,10 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                Employee employee = await service.GetByIdAsync(id);
-                if (employee != null)
+                Employee getEmployee = await service.GetByIdAsync(id);
+                if (getEmployee != null)
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, employee);
+                    return Request.CreateResponse(HttpStatusCode.OK, getEmployee);
                 }
                 return Request.CreateResponse(HttpStatusCode.NotFound, "Employee not found");
             }
@@ -106,8 +106,8 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                List<Employee> employees = await service.GetAllAsync();
-                return Request.CreateResponse(HttpStatusCode.OK, employees);
+                List<Employee> getAllEmployees = await service.GetAllAsync();
+                return Request.CreateResponse(HttpStatusCode.OK, getAllEmployees);
             }
             catch (Exception ex)
             {

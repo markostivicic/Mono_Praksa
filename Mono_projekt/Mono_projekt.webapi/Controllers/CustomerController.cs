@@ -51,8 +51,8 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                bool delete = await service.DeleteAsync(customerId);
-                if (delete)
+                bool isDelete = await service.DeleteAsync(customerId);
+                if (isDelete)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, "Customer deleted");
                 }
@@ -71,10 +71,10 @@ namespace Mono_projekt.webapi.Controllers
             try
             {
                 Customer newCusromer = new Customer(id, updateCustomerRest.FirstName, updateCustomerRest.LastName);
-                Customer customer = await service.UpdateAsync(id,newCusromer);
-                if(customer != null)
+                Customer updateCustomer = await service.UpdateAsync(id,newCusromer);
+                if(updateCustomer != null)
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, "Customer updated");
+                    return Request.CreateResponse(HttpStatusCode.OK, updateCustomer);
                 }
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, "Failed to update customer");
             }
@@ -90,10 +90,10 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                Customer customer = await service.GetByIdAsync(id);
-                if(customer != null)
+                Customer getCustomer = await service.GetByIdAsync(id);
+                if(getCustomer != null)
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, customer);
+                    return Request.CreateResponse(HttpStatusCode.OK, getCustomer);
                 }
                 return Request.CreateResponse(HttpStatusCode.NotFound, "Customer not found");
             }
@@ -107,8 +107,8 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                List<Customer> customers = await service.GetAllAsync();
-                return Request.CreateResponse(HttpStatusCode.OK, customers);
+                List<Customer> getAllCustomers = await service.GetAllAsync();
+                return Request.CreateResponse(HttpStatusCode.OK, getAllCustomers);
             }
             catch (Exception ex)
             {
