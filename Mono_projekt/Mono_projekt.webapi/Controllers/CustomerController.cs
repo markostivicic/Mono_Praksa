@@ -70,8 +70,12 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                Customer newCusromer = new Customer(id, updateCustomerRest.FirstName, updateCustomerRest.LastName);
-                Customer updateCustomer = await service.UpdateAsync(id,newCusromer);
+                Customer currentCusromer = await service.GetByIdAsync(id);
+                if (currentCusromer == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, "Bad request");
+                }
+                Customer updateCustomer = await service.UpdateAsync(id,currentCusromer);
                 if(updateCustomer != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, updateCustomer);

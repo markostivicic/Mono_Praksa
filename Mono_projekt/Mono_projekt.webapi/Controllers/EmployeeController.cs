@@ -69,8 +69,12 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                Employee newEmployee = new Employee(id, updateEmployeeRest.FirstName, updateEmployeeRest.LastName);
-                Employee updateEmployee = await service.UpdateAsync(id, newEmployee);
+                Employee currentEmployee = await service.GetByIdAsync(id);
+                if (currentEmployee == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, "Bad request");
+                }
+                Employee updateEmployee = await service.UpdateAsync(id, currentEmployee);
                 if (updateEmployee != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, updateEmployee);
