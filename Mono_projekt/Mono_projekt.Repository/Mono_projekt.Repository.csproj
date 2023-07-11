@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=7.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.7.0.1\lib\netstandard2.0\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -90,10 +93,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerRepository.cs" />
+    <Compile Include="DIModuleRepository.cs" />
     <Compile Include="EmployeeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mono_projekt.Common\Mono_projekt.Common.csproj">
+      <Project>{35aed249-2ef7-4891-b021-2752eb069775}</Project>
+      <Name>Mono_projekt.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mono_projekt.Model.Common\Mono_projekt.Model.Common.csproj">
       <Project>{0ffe6144-75ad-4633-a4a9-993cda9c9cc4}</Project>
       <Name>Mono_projekt.Model.Common</Name>

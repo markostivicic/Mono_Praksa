@@ -17,12 +17,20 @@ using HttpGetAttribute = System.Web.Http.HttpGetAttribute;
 using Mono_projekt.Service;
 using Mono_projekt.Models;
 using System.Threading.Tasks;
+using Mono_projekt.Common.Sort;
+using Mono_projekt.Common.Pagination;
+using Mono_projekt.Common.Filters;
 
 namespace Mono_projekt.webapi.Controllers
 {
     public class CustomerController : ApiController
     {
-        private CustomerService service = new CustomerService();  
+        private ICustomerService _service;
+        
+        public CustomerController(ICustomerService service)
+        {
+            _service = service;
+        }
         [HttpPost]
         public async Task<HttpResponseMessage> InsertCustomerAsync([FromBody] CreateCustomerRest createCustomerRest)
         {
@@ -30,7 +38,7 @@ namespace Mono_projekt.webapi.Controllers
             {
                 Guid customerId = Guid.NewGuid();
                 Customer newCusromer = new Customer(customerId, createCustomerRest.FirstName, createCustomerRest.LastName);
-                Customer customer = await service.CreateAsync(newCusromer);
+                Customer customer = await _service.CreateAsync(newCusromer);
                 if (customer != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, customer);
@@ -51,7 +59,7 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                bool isDelete = await service.DeleteAsync(customerId);
+                bool isDelete = await _service.DeleteAsync(customerId);
                 if (isDelete)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, "Customer deleted");
@@ -70,12 +78,14 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                Customer currentCusromer = await service.GetByIdAsync(id);
+                Customer currentCusromer = await _service.GetByIdAsync(id);
                 if (currentCusromer == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.InternalServerError, "Bad request");
                 }
-                Customer updateCustomer = await service.UpdateAsync(id,currentCusromer);
+                if(updateCustomerRest.FirstName != null) currentCusromer.FirstName = updateCustomerRest.FirstName;
+                if (updateCustomerRest.LastName != null) currentCusromer.LastName = updateCustomerRest.LastName;
+                Customer updateCustomer = await _service.UpdateAsync(id,currentCusromer);
                 if(updateCustomer != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, updateCustomer);
@@ -94,7 +104,7 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                Customer getCustomer = await service.GetByIdAsync(id);
+                Customer getCustomer = await _service.GetByIdAsync(id);
                 if(getCustomer != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, getCustomer);
@@ -107,11 +117,11 @@ namespace Mono_projekt.webapi.Controllers
             }   
         }
         [HttpGet]
-        public async Task<HttpResponseMessage> GetAllCustomersAsync()
+        public async Task<HttpResponseMessage> GetAllCustomersAsync([FromUri] Sort sort, [FromUri] Pagination pagination, [FromUri] CustomerFilter filter)
         {
             try
             {
-                List<Customer> getAllCustomers = await service.GetAllAsync();
+                (List<Customer>, int) getAllCustomers = await _service.GetAllAsync(sort, pagination, filter);
                 return Request.CreateResponse(HttpStatusCode.OK, getAllCustomers);
             }
             catch (Exception ex)

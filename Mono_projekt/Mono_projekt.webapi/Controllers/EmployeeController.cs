@@ -21,7 +21,13 @@ namespace Mono_projekt.webapi.Controllers
 {
     public class EmployeeController : ApiController
     {
-        private EmployeeService service = new EmployeeService();
+        private IEmployeeService _service;
+
+        public EmployeeController(IEmployeeService service)
+        {
+            _service = service;
+        }
+
         [HttpPost]
         public async Task<HttpResponseMessage> InsertEmployeeAsync([FromBody] CreateEmployeeRest createEmployeeRest)
         {
@@ -29,7 +35,7 @@ namespace Mono_projekt.webapi.Controllers
             {
                 Guid employeeId = Guid.NewGuid();
                 Employee newCusromer = new Employee(employeeId, createEmployeeRest.FirstName, createEmployeeRest.LastName);
-                Employee employee = await service.CreateAsync(newCusromer);
+                Employee employee = await _service.CreateAsync(newCusromer);
                 if (employee != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, employee);
@@ -50,7 +56,7 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                bool isDelete = await service.DeleteAsync(employeeId);
+                bool isDelete = await _service.DeleteAsync(employeeId);
                 if (isDelete)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, "Employee deleted");
@@ -69,12 +75,14 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                Employee currentEmployee = await service.GetByIdAsync(id);
+                Employee currentEmployee = await _service.GetByIdAsync(id);
                 if (currentEmployee == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.InternalServerError, "Bad request");
                 }
-                Employee updateEmployee = await service.UpdateAsync(id, currentEmployee);
+                if (updateEmployeeRest.FirstName != null) currentEmployee.FirstName = updateEmployeeRest.FirstName;
+                if (updateEmployeeRest.LastName != null) currentEmployee.LastName = updateEmployeeRest.LastName;
+                Employee updateEmployee = await _service.UpdateAsync(id, currentEmployee);
                 if (updateEmployee != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, updateEmployee);
@@ -93,7 +101,7 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                Employee getEmployee = await service.GetByIdAsync(id);
+                Employee getEmployee = await _service.GetByIdAsync(id);
                 if (getEmployee != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, getEmployee);
@@ -110,7 +118,7 @@ namespace Mono_projekt.webapi.Controllers
         {
             try
             {
-                List<Employee> getAllEmployees = await service.GetAllAsync();
+                List<Employee> getAllEmployees = await _service.GetAllAsync();
                 return Request.CreateResponse(HttpStatusCode.OK, getAllEmployees);
             }
             catch (Exception ex)

@@ -42,3 +42,7 @@ C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Repository\obj\Deb
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Repository\obj\Debug\Mono_projekt.Repository.csproj.CopyComplete
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Repository\obj\Debug\Mono_projekt.Repository.dll
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Repository\obj\Debug\Mono_projekt.Repository.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Repository\bin\Debug\Autofac.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Repository\bin\Debug\Autofac.xml
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Repository\bin\Debug\Mono_projekt.Common.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Repository\bin\Debug\Mono_projekt.Common.pdb

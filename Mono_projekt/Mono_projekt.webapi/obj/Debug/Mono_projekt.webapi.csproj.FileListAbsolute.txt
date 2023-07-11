@@ -126,3 +126,10 @@ C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_pr
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Repository.pdb
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Repository.dll.config
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Repository.Common.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Autofac.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Autofac.Integration.WebApi.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Autofac.xml
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Autofac.Integration.WebApi.xml
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Service.dll.config
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Common.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Common.pdb

@@ -9,3 +9,5 @@ C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\obj
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\obj\Debug\Mono_projekt.Service.Common.csproj.CopyComplete
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\obj\Debug\Mono_projekt.Service.Common.dll
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\obj\Debug\Mono_projekt.Service.Common.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\bin\Debug\Mono_projekt.Common.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.Service.Common\bin\Debug\Mono_projekt.Common.pdb

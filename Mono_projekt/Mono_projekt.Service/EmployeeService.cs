@@ -12,38 +12,38 @@ namespace Mono_projekt.Service
 {
     public class EmployeeService : IEmployeeService
     {
-        private EmployeeRepository repository = new EmployeeRepository();
+        private IEmployeeRepository _repository;
+
+        public EmployeeService(IEmployeeRepository repository)
+        {
+            _repository = repository;
+        }
 
         public async Task<Employee> CreateAsync(Employee employee)
         {
-            return await repository.CreateAsync(employee);
+            return await _repository.CreateAsync(employee);
         }
 
         public async Task<Employee> UpdateAsync(Guid id, Employee employee)
         {
-            if (id != null && employee != null)
-            {
-                return await repository.UpdateAsync(id, employee);
-            }
-            else
-            {
-                return null;
-            }
+
+            return await _repository.UpdateAsync(id, employee);
+
         }
 
         public async Task<bool> DeleteAsync(Guid id)
         {
-            return await repository.DeleteAsync(id);
+            return await _repository.DeleteAsync(id);
         }
 
         public async Task<Employee> GetByIdAsync(Guid id)
         {
-            return await repository.GetByIdAsync(id);
+            return await _repository.GetByIdAsync(id);
         }
 
         public async Task<List<Employee>> GetAllAsync()
         {
-            return await repository.GetAllAsync();
+            return await _repository.GetAllAsync();
         }
     }
 }

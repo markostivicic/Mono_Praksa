@@ -1,10 +1,15 @@
-﻿using Mono_projekt.Models;
+﻿using Mono_projekt.Common.Filters;
+using Mono_projekt.Common.Pagination;
+using Mono_projekt.Common.Sort;
+using Mono_projekt.Models;
 using Mono_projekt.Repository.Common;
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +23,7 @@ namespace Mono_projekt.Repository
         {
             connectionString = "Server=localhost;Port=5432;Database=HairSalon;User Id=postgres;Password=postgres;";
         }
+
 
         public async Task<Customer> CreateAsync(Customer customer)
         {
@@ -137,14 +143,27 @@ namespace Mono_projekt.Repository
                 return null;
             }
         }
-        public async Task<List<Customer>> GetAllAsync()
+        public async Task<(List<Customer>, int)> GetAllAsync(ISort sort = null, IPagination pagination = null, ICustomerFilter filter = null)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
-                string selectSql = "SELECT Id, FirstName, LastName FROM Customer";
-                using (NpgsqlCommand command = new NpgsqlCommand(selectSql, connection))
+                StringBuilder sb = new StringBuilder();
+                string selectSql = "SELECT Id, FirstName, LastName FROM Customer WHERE 1=1";
+                sb.Append(selectSql);
+                if (filter != null && !string.IsNullOrEmpty(filter.FirstName))
                 {
+                    sb.Append(" AND FirstName LIKE @FirstName");
+                }
+                sb.Append(" LIMIT @pageSize OFFSET @offset");
+                
+                using (NpgsqlCommand command = new NpgsqlCommand(sb.ToString(), connection))
+                {
+                    command.Parameters.AddWithValue("FirstName", "%" + filter.FirstName + "%");
+                    command.Parameters.AddWithValue("Order", sort.Order);
+                    command.Parameters.AddWithValue("pageSize", pagination.PageSize);
+                    command.Parameters.AddWithValue("offset", (pagination.PageNumber - 1) * pagination.PageSize);
+                    int totalItems = 0;
                     List<Customer> customers = new List<Customer>();
                     using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
                     {
@@ -155,9 +174,10 @@ namespace Mono_projekt.Repository
                             string lastName = reader.GetString(2);
                             Customer customer = new Customer(id, firstName, lastName);
                             customers.Add(customer);
+                            totalItems += 1;
                         }
                     }
-                    return customers;
+                    return (customers, totalItems);
                 }
             }
         }
