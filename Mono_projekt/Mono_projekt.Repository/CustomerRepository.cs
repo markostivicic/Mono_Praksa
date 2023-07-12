@@ -148,19 +148,51 @@ namespace Mono_projekt.Repository
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
-                StringBuilder sb = new StringBuilder();
-                string selectSql = "SELECT Id, FirstName, LastName FROM Customer WHERE 1=1";
-                sb.Append(selectSql);
+                StringBuilder sb = new StringBuilder("SELECT Id, FirstName, LastName, COUNT(*) OVER() as TotalCount FROM Customer WHERE 1=1");
                 if (filter != null && !string.IsNullOrEmpty(filter.FirstName))
                 {
                     sb.Append(" AND FirstName LIKE @FirstName");
                 }
+                if (sort == null)
+                {
+                    sort = new Sort()
+                    {
+                        Order = "ASC",
+                        SortBy = "Id"
+                    };
+                }
+                if (string.IsNullOrWhiteSpace(sort.Order))
+                {
+                    sort.Order = "ASC";
+                }
+                if (string.IsNullOrWhiteSpace(sort.SortBy))
+                {
+                    sort.SortBy = "Id";
+                }
+
+                if (pagination == null)
+                {
+                    pagination = new Pagination()
+                    {
+                        PageNumber = 1,
+                        PageSize = 10
+                    };
+                }
+                if (pagination.PageSize == 0)
+                {
+                    pagination.PageSize = 10;
+                }
+                if (pagination.PageNumber == 0)
+                {
+                    pagination.PageNumber = 1;
+                }
+                //sb.Append(" GROUP BY Id, FirstName, LastName");
+                sb.Append($" ORDER BY {sort.SortBy} {sort.Order}");
                 sb.Append(" LIMIT @pageSize OFFSET @offset");
-                
+
                 using (NpgsqlCommand command = new NpgsqlCommand(sb.ToString(), connection))
                 {
                     command.Parameters.AddWithValue("FirstName", "%" + filter.FirstName + "%");
-                    command.Parameters.AddWithValue("Order", sort.Order);
                     command.Parameters.AddWithValue("pageSize", pagination.PageSize);
                     command.Parameters.AddWithValue("offset", (pagination.PageNumber - 1) * pagination.PageSize);
                     int totalItems = 0;
@@ -172,11 +204,12 @@ namespace Mono_projekt.Repository
                             Guid id = reader.GetGuid(0);
                             string firstName = reader.GetString(1);
                             string lastName = reader.GetString(2);
+                            totalItems = reader.GetInt32(3);
                             Customer customer = new Customer(id, firstName, lastName);
                             customers.Add(customer);
-                            totalItems += 1;
                         }
                     }
+
                     return (customers, totalItems);
                 }
             }

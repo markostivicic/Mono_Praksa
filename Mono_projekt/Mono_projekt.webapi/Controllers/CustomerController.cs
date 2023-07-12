@@ -117,7 +117,7 @@ namespace Mono_projekt.webapi.Controllers
             }   
         }
         [HttpGet]
-        public async Task<HttpResponseMessage> GetAllCustomersAsync([FromUri] Sort sort, [FromUri] Pagination pagination, [FromUri] CustomerFilter filter)
+        public async Task<HttpResponseMessage> GetAllCustomersAsync([FromUri] Sort sort = null, [FromUri] Pagination pagination = null, [FromUri] CustomerFilter filter = null)
         {
             try
             {

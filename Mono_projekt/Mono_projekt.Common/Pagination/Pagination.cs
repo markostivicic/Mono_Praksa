@@ -8,7 +8,7 @@ namespace Mono_projekt.Common.Pagination
 {
     public class Pagination : IPagination
     {
-        public int? PageNumber { get; set; } = 1;
-        public int? PageSize { get; set; } = 3;
+        public int PageNumber { get; set; } 
+        public int PageSize { get; set; } 
     }
 }
