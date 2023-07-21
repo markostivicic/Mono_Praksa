@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+
+<script>
+function toNDecimal(num1,num2, n){
+    let num = num1 *num2;
+    let a = num.toFixed(n+1);
+    a = Number(a);
+    return a.toFixed(n);
+}
+console.log(toNDecimal(660,0.08875,2));
+function palindrome(str) {
+  var re = /[\W_]/g;
+  var lowRegStr = str.toLowerCase().replace(re, '');
+  var reverseStr = lowRegStr.split('').reverse().join(''); 
+  return reverseStr === lowRegStr;
+}
+ console.log(palindrome("Ana voli milovana"))
+
+
+let arr = ["apple", "mango", "apple",
+          "orange", "mango", "mango"];
+  
+function removeDuplicates(arr) {
+    return arr.filter((item,
+        index) => arr.indexOf(item) === index);
+}
+console.log(removeDuplicates(arr));
+
+let randomNumber = Math.floor(Math.random() * 100) + 1;
+console.log(randomNumber);
+
+function isThreeOrFive(randomNumber){
+    if(randomNumber%3 == 0 && randomNumber%5 == 0){
+        return "FizzBuzz";
+    }
+    else if(randomNumber%3 == 0){
+        return "Fizz";
+    }
+    else if(randomNumber%5 == 0){
+        return "Buzz";
+    }
+    else{
+        return randomNumber;
+    }
+    
+}
+console.log(isThreeOrFive(randomNumber))
+function fibonacci(num) {
+
+  var x = 0;
+  var y = 1;
+  var z;
+  var i = 2;
+  while (i < num+1) {
+    z = x + y;
+    x = y;
+    y = z;
+
+    i = i + 1;
+  }
+  return y;
+}
+
+
+console.log(fibonacci(randomNumber));
+</script>
+
+</body>
+</html>
