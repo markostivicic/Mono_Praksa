@@ -4,32 +4,39 @@ function getLeagueIndexFromURL() {
     return parseInt(urlParams.get('index'));
 }
 
-function displayLeagueData(index) {
+function displayLeagueData(id) {
     let leagues = localStorage.getItem('leagues');
     leagues = leagues ? JSON.parse(leagues) : [];
 
-    if (index < 0 || index >= leagues.length) {
-        alert('Invalid index.');
+    
+    let league = leagues.find(league => league.id === id);
+
+    if (!league) {
+        alert('Invalid ID.');
         return;
     }
 
-    document.getElementById('nameInput').value = leagues[index].name;
-    document.getElementById('sportInput').value = leagues[index].sport;
-    document.getElementById('countryInput').value = leagues[index].country;
+    document.getElementById('nameInput').value = league.name;
+    document.getElementById('sportInput').value = league.sport;
+    document.getElementById('countryInput').value = league.country;
 }
 
+
 function saveEdit() {
-    let index = getLeagueIndexFromURL();
-    if (isNaN(index)) {
-        alert('Invalid league index.');
+    let id = getLeagueIdFromURL();
+    if (!id) {
+        alert('Invalid league ID.');
         return;
     }
 
     let leagues = localStorage.getItem('leagues');
     leagues = leagues ? JSON.parse(leagues) : [];
 
-    if (index < 0 || index >= leagues.length) {
-        alert('Invalid index.');
+    // Find the league with the given ID
+    let league = leagues.find(league => league.id === id);
+
+    if (!league) {
+        alert('Invalid league.');
         return;
     }
 
@@ -45,12 +52,14 @@ function saveEdit() {
         return;
     }
 
-    leagues[index].name = editedName;
-    leagues[index].sport = editedSport;
-    leagues[index].country = editedCountry;
+    league.name = editedName;
+    league.sport = editedSport;
+    league.country = editedCountry;
+
     localStorage.setItem('leagues', JSON.stringify(leagues));
     window.location.href = 'index.html';
 }
+
 
 function cancelEdit() {
     window.location.href = 'index.html';

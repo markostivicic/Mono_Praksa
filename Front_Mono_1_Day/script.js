@@ -8,14 +8,18 @@ function addLeague() {
         return;
     }
 
+    let leagues = localStorage.getItem('leagues');
+    leagues = leagues ? JSON.parse(leagues) : [];
+
+    let id = Date.now().toString(); 
+
     let league = {
+        id: id, 
         name: name,
         sport: sport,
         country: country
     };
 
-    let leagues = localStorage.getItem('leagues');
-    leagues = leagues ? JSON.parse(leagues) : [];
     leagues.push(league);
     localStorage.setItem('leagues', JSON.stringify(leagues));
     displayLeagues();
@@ -46,31 +50,36 @@ function displayLeagues() {
         let countryCell = row.insertCell();
         countryCell.textContent = leagues[i].country;
         let actionCell = row.insertCell();
-        actionCell.innerHTML = '<button onclick="editLeague(' + i + ')">Edit</button> <button onclick="deleteLeague(' + i + ')">Delete</button>';
+        actionCell.innerHTML = '<button onclick="editLeague(' + leagues[i].id + ')">Edit</button> <button onclick="deleteLeague(' + leagues[i].id + ')">Delete</button>';
     }
 }
 
-function editLeague(index) {
+function editLeague(id) {
     let leagues = localStorage.getItem('leagues');
     leagues = leagues ? JSON.parse(leagues) : [];
 
-    if (index < 0 || index >= leagues.length) {
-        alert('Invalid index.');
+    let league = leagues.find(league => league.id === id);
+
+    if (!league) {
+        alert('Invalid ID.');
         return;
     }
 
-    document.getElementById('nameInput').value = leagues[index].name;
-    document.getElementById('sportInput').value = leagues[index].sport;
-    document.getElementById('countryInput').value = leagues[index].country;
-    window.location.href = 'edit.html?index=' + index;
+    document.getElementById('nameInput').value = league.name;
+    document.getElementById('sportInput').value = league.sport;
+    document.getElementById('countryInput').value = league.country;
+
+    window.location.href = 'edit.html?id=' + id;
 }
 
-function deleteLeague(index) {
+function deleteLeague(id) {
     let leagues = localStorage.getItem('leagues');
     leagues = leagues ? JSON.parse(leagues) : [];
 
-    if (index < 0 || index >= leagues.length) {
-        alert('Invalid index.');
+    let index = leagues.findIndex(league => league.id === id);
+
+    if (index === -1) {
+        alert('Invalid ID.');
         return;
     }
 
@@ -81,6 +90,7 @@ function deleteLeague(index) {
         displayLeagues();
     }
 }
+
 
 function clearInputFields() {
     document.getElementById('nameInput').value = '';
