@@ -1,69 +1,28 @@
+import { NavLink, Route, Routes } from "react-router-dom";
 import AddCustomer from "./components/AddCustomer";
+import Home from "./Home";
 import UpdateCustomer from "./components/UpdateCustomer";
-import CustomerList from "./components/CustomerList";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import API from "./api";
+import "./App.css";
 
 function App() {
-  const [customers, setCustomers] = useState([]);
-  const [editData, setEditData] = useState(null);
-
-  const fetchCustomers = () => {
-    axios.get("https://localhost:44348/api/customer").then((response) => {
-      console.log(response.data);
-      setCustomers(response.data.Item1);
-    });
-  };
-
-  useEffect(() => {
-    fetchCustomers();
-  }, []);
-  async function handleDelete(id) {
-    await API.delete(`/${id}`)
-      .then((response) => {
-        console.log(response);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
-    fetchCustomers();
-  }
-  /*async function getAccountById(id) {
-    try {
-      await axios
-        .get("https://localhost:44348/api/customer/" + id)
-        .then((response) => {
-          setEditData(response.data);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }*/
-
-  function handleEdit(customer) {
-    setEditData(customer);
-    console.log(customer);
-  }
-
   return (
-    <div>
-      <CustomerList
-        fetchCustomers={fetchCustomers}
-        customers={customers}
-        handleDelete={handleDelete}
-        onEdit={handleEdit}
-      />
-      <AddCustomer fetchCustomers={fetchCustomers} />
-      <UpdateCustomer
-        firstName={editData ? editData.FirstName : ""}
-        lastName={editData ? editData.LastName : ""}
-        id={editData ? editData.Id : ""}
-        fetchCustomers={fetchCustomers}
-      />
-    </div>
+    <>
+      <nav>
+        <ul>
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+            <NavLink to="/addcustomer">AddCustomer</NavLink>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/addcustomer" element={<AddCustomer />} />
+        <Route path="/updatecustomer/:id" element={<UpdateCustomer />} />
+      </Routes>
+    </>
   );
 }
-
 export default App;

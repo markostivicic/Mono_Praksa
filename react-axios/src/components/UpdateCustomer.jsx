@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 import API from "../api";
 
 function UpdateCustomer(props) {
+  const [editData, setEditData] = useState(null);
+  const navigate = useNavigate();
+  const { id } = useParams();
+  useEffect(() => {
+    axios.get("https://localhost:44348/api/customer/" + id).then((response) => {
+      setEditData(response.data);
+      console.log(response);
+    });
+  }, []);
+
   async function submitForm(e) {
     e.preventDefault();
     console.log(e);
@@ -10,13 +22,12 @@ function UpdateCustomer(props) {
       firstName: e.target.elements.firstName.value,
       lastName: e.target.elements.lastName.value,
     };
-    console.log(state);
-    if (props.id !== "") {
-      await API.put(`/${props.id}`, state).then((res) => {
+    if (id !== "") {
+      await API.put(`/${id}`, state).then((res) => {
         console.log(res);
         console.log(res.data);
       });
-      props.fetchCustomers();
+      navigate("/");
     }
   }
 
@@ -27,18 +38,8 @@ function UpdateCustomer(props) {
         <form onSubmit={submitForm}>
           <label>
             Customer Name:
-            <input
-              type="text"
-              name="firstName"
-              placeholder="firstName"
-              defaultValue={props.firstName}
-            />
-            <input
-              type="text"
-              name="lastName"
-              placeholder="lastName"
-              defaultValue={props.lastName}
-            />
+            <input type="text" name="firstName" placeholder="firstName" />
+            <input type="text" name="lastName" placeholder="lastName" />
           </label>
           <button type="submit">Update</button>
         </form>

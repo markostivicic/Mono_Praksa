@@ -1,6 +1,8 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function AddCustomer(props) {
+function AddCustomer() {
+  const navigate = useNavigate();
   const submitForm = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -17,7 +19,7 @@ function AddCustomer(props) {
         console.log(res);
         console.log(res.data);
       });
-    props.fetchCustomers();
+    navigate("/");
   };
 
   return (
@@ -31,9 +33,7 @@ function AddCustomer(props) {
             Second Name:
             <input id="LastName" type="text" name="LastName" />
           </label>
-          <button type="submit" onClick={() => props.fetchCustomers()}>
-            Add
-          </button>
+          <button type="submit">Add</button>
         </form>
       </div>
     </div>

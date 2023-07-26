@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import API from "../api";
 
 export default function CustomerList(props) {
+  const navigate = useNavigate();
   return (
     <>
       <p>Costumer List</p>
@@ -26,7 +29,11 @@ export default function CustomerList(props) {
                 <button onClick={() => props.handleDelete(customer.Id)}>
                   X
                 </button>
-                <button onClick={() => props.onEdit(customer)}>edit</button>
+                <button
+                  onClick={() => navigate(`/updatecustomer/${customer.Id}`)}
+                >
+                  edit
+                </button>
               </td>
             </tr>
           ))}
