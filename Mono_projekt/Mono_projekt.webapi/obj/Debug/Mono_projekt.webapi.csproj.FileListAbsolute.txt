@@ -133,3 +133,6 @@ C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Autofac
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Service.dll.config
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Common.dll
 C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\Mono_projekt.Common.pdb
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\System.Web.Cors.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\System.Web.Http.Cors.dll
+C:\Users\Student\Desktop\NpgsqlRepo\Mono_projekt\Mono_projekt.webapi\bin\System.Web.Http.Cors.xml

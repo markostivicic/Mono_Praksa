@@ -90,7 +90,7 @@ namespace Mono_projekt.Repository
                 string checkSql = "SELECT COUNT(*) FROM Customer WHERE Id = @id";
                 using (NpgsqlCommand checkCommand = new NpgsqlCommand(checkSql, connection))
                 {
-                    checkCommand.Parameters.AddWithValue("id", id);
+                    checkCommand.Parameters.AddWithValue("@id", id);
                     int customerCount = Convert.ToInt32(checkCommand.ExecuteScalar());
                     if (customerCount == 0)
                     {
@@ -100,7 +100,7 @@ namespace Mono_projekt.Repository
                 string deleteSql = "DELETE FROM Customer WHERE Id = @id";
                 using (NpgsqlCommand deleteCommand = new NpgsqlCommand(deleteSql, connection))
                 {
-                    deleteCommand.Parameters.AddWithValue("id", id);
+                    deleteCommand.Parameters.AddWithValue("@id", id);
                     deleteCommand.Connection = connection;
                     int rowsAffected = await deleteCommand.ExecuteNonQueryAsync();
                     if (rowsAffected > 0)
@@ -175,12 +175,12 @@ namespace Mono_projekt.Repository
                     pagination = new Pagination()
                     {
                         PageNumber = 1,
-                        PageSize = 10
+                        PageSize = 50
                     };
                 }
                 if (pagination.PageSize == 0)
                 {
-                    pagination.PageSize = 10;
+                    pagination.PageSize = 50;
                 }
                 if (pagination.PageNumber == 0)
                 {
