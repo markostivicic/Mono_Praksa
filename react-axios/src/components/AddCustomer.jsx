@@ -1,24 +1,24 @@
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API from "../api";
 
-function AddCustomer() {
+function AddCustomer({ userInfo }) {
   const navigate = useNavigate();
   const submitForm = (e) => {
     e.preventDefault();
     const form = e.target;
     console.log(form.elements);
-    const firstName = form.elements["FirstName"];
-    const lastName = form.elements["LastName"];
+    const name = form.elements["Name"];
     const newCustomer = {
-      FirstName: firstName.value,
-      LastName: lastName.value,
+      Name: name.value,
     };
-    axios
-      .post("https://localhost:44348/api/customer", newCustomer)
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-      });
+    API.post("", newCustomer, {
+      headers: {
+        Authorization: "Bearer " + userInfo.access_token,
+      },
+    }).then((res) => {
+      console.log(res);
+      console.log(res.data);
+    });
     navigate("/");
   };
 
@@ -29,9 +29,7 @@ function AddCustomer() {
         <form onSubmit={submitForm}>
           <label>
             First Name:
-            <input id="FirstName" type="text" name="FirstName" />
-            Second Name:
-            <input id="LastName" type="text" name="LastName" />
+            <input id="Name" type="text" name="Name" />
           </label>
           <button type="submit">Add</button>
         </form>

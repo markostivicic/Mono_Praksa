@@ -15,26 +15,32 @@ export default function CustomerList(props) {
       <table>
         <thead>
           <tr>
-            <th>First</th>
-            <th>Last</th>
-            <th>Action</th>
+            <th>Name</th>
+            {props.userInfo !== null && props.userInfo.role === "Admin" ? (
+              <th>Action</th>
+            ) : (
+              ""
+            )}
           </tr>
         </thead>
         <tbody>
           {props.customers.map((customer) => (
-            <tr key={customer.Id}>
-              <td>{customer.FirstName}</td>
-              <td>{customer.LastName}</td>
-              <td>
-                <button onClick={() => props.handleDelete(customer.Id)}>
-                  X
-                </button>
-                <button
-                  onClick={() => navigate(`/updatecustomer/${customer.Id}`)}
-                >
-                  edit
-                </button>
-              </td>
+            <tr key={customer.id}>
+              <td>{customer.name}</td>
+              {props.userInfo !== null && props.userInfo.role === "Admin" ? (
+                <td>
+                  <button onClick={() => props.handleDelete(customer.id)}>
+                    X
+                  </button>
+                  <button
+                    onClick={() => navigate(`/updatecustomer/${customer.id}`)}
+                  >
+                    edit
+                  </button>
+                </td>
+              ) : (
+                ""
+              )}
             </tr>
           ))}
         </tbody>

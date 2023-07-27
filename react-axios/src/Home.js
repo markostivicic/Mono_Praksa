@@ -1,27 +1,38 @@
-import AddCustomer from "./components/AddCustomer";
-import UpdateCustomer from "./components/UpdateCustomer";
 import CustomerList from "./components/CustomerList";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import API from "./api";
 import { useNavigate } from "react-router-dom";
 
-function Home() {
+function Home({ userInfo }) {
   const [customers, setCustomers] = useState([]);
   const [editData, setEditData] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userInfo === null) {
+      navigate("/login");
+    }
+  }, []);
   const fetchCustomers = () => {
-    axios.get("https://localhost:44348/api/customer").then((response) => {
+    API.get("", {
+      headers: {
+        Authorization: "Bearer " + userInfo.access_token,
+      },
+    }).then((response) => {
       console.log(response.data);
-      setCustomers(response.data.Item1);
+      setCustomers(response.data.items);
     });
   };
-
+  console.log(editData);
   useEffect(() => {
     fetchCustomers();
   }, []);
   async function handleDelete(id) {
-    await API.delete(`/${id}`)
+    await API.delete(`/toggle/${id}`, {
+      headers: {
+        Authorization: "Bearer " + userInfo.access_token,
+      },
+    })
       .then((response) => {
         console.log(response);
         console.log(response.data);
@@ -55,6 +66,7 @@ function Home() {
         customers={customers}
         handleDelete={handleDelete}
         onEdit={handleEdit}
+        userInfo={userInfo}
       />
       <button onClick={() => navigate(`/addcustomer`)}>Add</button>
     </div>
